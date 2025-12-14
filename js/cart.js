@@ -24,7 +24,14 @@ function renderCart() {
     const cart = readCart();
     container.innerHTML = '';
     if (!cart || cart.length === 0) {
-        container.innerHTML = '<p>Your cart is empty.</p><p style="margin-top:10px;"><a href="collection.html" class="btn-primary">Continue Shopping</a></p>';
+        container.innerHTML = `
+            <div style="text-align:center; padding:40px;">
+                <img src="assets/images/bags/bag1.jpg" alt="empty" style="max-width:240px; opacity:0.9; border-radius:8px;">
+                <h3 style="margin-top:12px;">Your cart is empty</h3>
+                <p style="color:#666;">Add items from our collection to get started.</p>
+                <p style="margin-top:10px;"><a href="collection.html" class="btn-primary">Shop Collection</a></p>
+            </div>
+        `;
         return;
     }
 

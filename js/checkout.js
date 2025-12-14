@@ -76,12 +76,14 @@ function renderCheckout() {
         setTimeout(() => {
             // Save order to localStorage as demo
             const orders = JSON.parse(localStorage.getItem('solare_orders') || '[]');
-            orders.push({ id: Date.now(), items: cart, total, shipping: { name: document.getElementById('shipName').value }, date: new Date().toISOString() });
+            const orderId = Date.now();
+            orders.push({ id: orderId, items: cart, total, shipping: { name: document.getElementById('shipName').value }, date: new Date().toISOString() });
             localStorage.setItem('solare_orders', JSON.stringify(orders));
+            localStorage.setItem('solare_last_order_id', String(orderId));
             // clear cart
             writeCart([]);
-            alert('Payment successful! Thank you for your purchase.');
-            window.location.href = 'index.html';
+            // redirect to confirmation
+            window.location.href = 'order-confirmation.html';
         }, 1200);
     });
 }

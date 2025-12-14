@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Order Confirmation — SOLARÉ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">SOLARÉ</div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="collection.html">Collection</a>
+                <a href="technology.html">Technology</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html" class="cart-link">Cart <span id="cartCount" class="cart-count">0</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container inner">
+                <h1 style="font-family: 'Playfair Display', serif; font-size:44px;">Thank you for your order</h1>
+                <p style="color:#fff; max-width:760px;">Ваш заказ принят. Ниже вы найдёте детали заказа и информацию о доставке.</p>
+            </div>
+        </section>
+
+        <section class="container" style="padding:60px 0;">
+            <div id="confirmationRoot">Loading order...</div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
+            <div>© 2025 SOLARÉ</div>
+            <div><a href="about.html">About</a></div>
+            <div><a href="contact.html">Contact</a></div>
+            <div><a href="#">Instagram</a></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+                    const id = localStorage.getItem('solare_last_order_id');
+                    const root = document.getElementById('confirmationRoot');
+                    if (!id) {
+                        root.innerHTML = '<p>No recent order found.</p>';
+                        return;
+                    }
+                    const orders = JSON.parse(localStorage.getItem('solare_orders') || '[]');
+                    const order = orders.find(o => String(o.id) === String(id));
+                    if (!order) {
+                        root.innerHTML = '<p>Order not found.</p>';
+                        return;
+                    }
+
+                    const el = document.createElement('div');
+                    el.innerHTML = `
+                <h3>Order #${order.id}</h3>
+                <div style="margin-top:12px;">
+                    ${order.items.map(i => `<div style="display:flex; justify-content:space-between; margin-bottom:8px;"><div>${i.name} x${i.qty}</div><div>$${(i.price*i.qty).toFixed(2)}</div></div>`).join('')}
+                </div>
+                <div style="margin-top:12px; font-weight:700;">Total: $${order.total.toFixed(2)}</div>
+                <div style="margin-top:18px;">We will email you shipping updates. If you have questions, reply to hello@solare.example</div>
+            `;
+            root.innerHTML = '';
+            root.appendChild(el);
+        });
+    </script>
+</body>
+
+</html>

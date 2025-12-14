@@ -24,24 +24,48 @@
         </div>
     </header>
 
-    <main class="container" style="padding:60px 0;">
-        <h1 style="font-family: 'Playfair Display', serif;">Contact</h1>
-        <p style="margin-top:20px; color:#444; max-width:760px;">Свяжитесь с нами: <a href="mailto:hello@solare.example">hello@solare.example</a> или используйте форму ниже.</p>
+    <main>
+        <section class="page-hero">
+            <div class="container inner">
+                <h1 style="font-family: 'Playfair Display', serif; font-size:44px;">Contact Us</h1>
+                <p style="color:#fff; max-width:760px;">Нужна помощь или хотите узнать больше о сотрудничестве? Напишите нам — мы ответим в течение 1-2 рабочих дней.</p>
+            </div>
+        </section>
 
-        <form id="contactForm" style="max-width:600px; margin-top:20px;">
-            <label style="display:block; margin-bottom:8px;">Name</label>
-            <input id="contactName" required style="width:100%; padding:10px; margin-bottom:12px;" placeholder="Ваше имя">
-            <label style="display:block; margin-bottom:8px;">Email</label>
-            <input id="contactEmail" type="email" required style="width:100%; padding:10px; margin-bottom:12px;" placeholder="you@example.com">
-            <label style="display:block; margin-bottom:8px;">Message</label>
-            <textarea id="contactMessage" required style="width:100%; padding:10px; height:120px;" placeholder="Сообщение"></textarea>
-            <div style="margin-top:12px;"><button id="contactSubmit" class="btn-primary" type="submit">Send</button></div>
-            <div id="contactFeedback" style="margin-top:12px; color:green; display:none;"></div>
-        </form>
+        <section class="container" style="padding:60px 0;">
+            <div style="display:grid; grid-template-columns: 1fr 380px; gap:28px; align-items:start;">
+                <div>
+                    <h2 style="font-family:'Playfair Display', serif;">Get in touch</h2>
+                    <p style="color:#444;">Свяжитесь: <a href="mailto:hello@solare.example">hello@solare.example</a> или заполните форму.</p>
+
+                    <form id="contactForm" style="max-width:640px; margin-top:12px;">
+                        <label>Name</label>
+                        <input id="contactName" required placeholder="Ваше имя">
+                        <label style="margin-top:8px; display:block;">Email</label>
+                        <input id="contactEmail" type="email" required placeholder="you@example.com">
+                        <label style="margin-top:8px; display:block;">Message</label>
+                        <textarea id="contactMessage" required placeholder="Сообщение" style="height:140px;"></textarea>
+                        <div style="margin-top:12px;"><button id="contactSubmit" class="btn-primary" type="submit">Send Message</button></div>
+                        <div id="contactFeedback" style="margin-top:12px; color:green; display:none;"></div>
+                    </form>
+                </div>
+
+                <aside style="background:#fff;padding:18px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.04);">
+                    <h3>Contact Details</h3>
+                    <p style="color:#666;">Open: Mon–Fri, 9:00–18:00<br>Phone: +1 (555) 123-4567<br>Address: 45 Fashion St, City</p>
+                    <div style="margin-top:12px;"><img src="assets/images/hero/hero.jpg" alt="map" style="width:100%; border-radius:6px; opacity:0.9; filter:grayscale(0.25);"></div>
+                </aside>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
-        © 2025 SOLARÉ
+        <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
+            <div>© 2025 SOLARÉ</div>
+            <div><a href="about.html">About</a></div>
+            <div><a href="contact.html">Contact</a></div>
+            <div><a href="#">Instagram</a></div>
+        </div>
     </footer>
 
     <script src="js/products.js"></script>

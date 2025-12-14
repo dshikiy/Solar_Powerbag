@@ -20,6 +20,8 @@ const cartCountEls = document.querySelectorAll("#cartCount");
 const shapeFilter = document.getElementById("shapeFilter");
 const colorFilter = document.getElementById("colorFilter");
 const clearFilters = document.getElementById("clearFilters");
+const searchInput = document.getElementById('searchInput');
+const sortSelect = document.getElementById('sortSelect');
 
 let currentProduct = null;
 
@@ -50,6 +52,29 @@ function addToCart(productId) {
     saveCart(cart);
 }
 
+// Small toast helper for instant feedback
+function showToast(message) {
+    let toast = document.getElementById('solareToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'solareToast';
+        toast.style.position = 'fixed';
+        toast.style.left = '50%';
+        toast.style.bottom = '24px';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = 'rgba(0,0,0,0.85)';
+        toast.style.color = '#fff';
+        toast.style.padding = '10px 18px';
+        toast.style.borderRadius = '8px';
+        toast.style.zIndex = 2000;
+        toast.style.fontSize = '14px';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+}
+
 function updateCartCount() {
     const cart = getCart();
     const count = cart.reduce((s, i) => s + i.qty, 0);
@@ -62,10 +87,25 @@ function createCard(product) {
     card.className = 'card';
     card.dataset.id = product.id;
     card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
+        <div class="card-media" style="position:relative; overflow:hidden;">
+            <img src="${product.image}" alt="${product.alt || product.name}" loading="lazy">
+            <div class="overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:8px; opacity:0; transition:opacity .18s ease; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%);">
+                <button class="btn-primary btn-small quick-view">View</button>
+                <button class="btn-primary btn-small quick-add">Add</button>
+            </div>
+        </div>
         <h3>${product.name}</h3>
-        <span>$${product.price}</span>
+        <div class="price">$${product.price}</div>
     `;
+    // hover overlay
+    card.addEventListener('mouseenter', () => { const ov = card.querySelector('.overlay'); if (ov) ov.style.opacity = '1'; });
+    card.addEventListener('mouseleave', () => { const ov = card.querySelector('.overlay'); if (ov) ov.style.opacity = '0'; });
+    // quick actions
+    card.querySelector('.quick-view').addEventListener('click', (e) => { e.stopPropagation();
+        openModal(product.id); });
+    card.querySelector('.quick-add').addEventListener('click', (e) => { e.stopPropagation();
+        addToCart(product.id);
+        showToast(`${product.name} добавлен в корзину`); });
     card.addEventListener('click', () => openModal(product.id));
     return card;
 }
@@ -97,11 +137,14 @@ function openModal(id) {
     modalPrice.textContent = `$${product.price}`;
     modalShape.textContent = product.shape;
     modalColor.textContent = product.color;
-    modal.style.display = 'block';
+    if (modal) modal.classList.add('show');
+    // move focus to close button for accessibility
+    const closeBtnEl = modal ? modal.querySelector('.close') : null;
+    if (closeBtnEl) closeBtnEl.focus();
 }
 
 function closeModal() {
-    modal.style.display = 'none';
+    if (modal) modal.classList.remove('show');
     currentProduct = null;
 }
 
@@ -129,8 +172,15 @@ function applyFilters() {
     const s = shapeFilter ? shapeFilter.value : '';
     const c = colorFilter ? colorFilter.value : '';
     let filtered = products.slice();
+    // search
+    const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+    if (q) filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || (p.description && p.description.toLowerCase().includes(q)));
     if (s) filtered = filtered.filter(p => p.shape === s);
     if (c) filtered = filtered.filter(p => p.color === c);
+    // sort
+    const sort = sortSelect ? sortSelect.value : '';
+    if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+    else if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
     renderProducts(filtered);
 }
 
@@ -145,6 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // filter listeners
     if (shapeFilter) shapeFilter.addEventListener('change', applyFilters);
     if (colorFilter) colorFilter.addEventListener('change', applyFilters);
+    if (searchInput) searchInput.addEventListener('input', applyFilters);
+    if (sortSelect) sortSelect.addEventListener('change', applyFilters);
     if (clearFilters) clearFilters.addEventListener('click', () => {
         if (shapeFilter) shapeFilter.value = '';
         if (colorFilter) colorFilter.value = '';
@@ -152,13 +204,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // close buttons (may be multiple if modal exists on both pages)
-    closeBtn.forEach(btn => btn.addEventListener('click', closeModal));
+    closeBtn.forEach(btn => {
+        btn.addEventListener('click', closeModal);
+        btn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') closeModal(); });
+    });
 
     // add to cart
     if (modalAddBtn) modalAddBtn.addEventListener('click', () => {
         if (currentProduct) {
             addToCart(currentProduct.id);
             closeModal();
+            showToast(`${currentProduct.name} добавлен в корзину`);
         }
     });
 
@@ -166,6 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
+    // close on ESC
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 });
 
 // expose helpers for testing in console
