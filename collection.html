@@ -15,8 +15,9 @@
             <div class="logo">SOLARÉ</div>
             <nav class="nav">
                 <a href="index.html">Home</a>
-                <a href="#">Technology</a>
-                <a href="#">About</a>
+                <a href="technology.html">Technology</a>
+                <a href="about.html">About</a>
+                <a href="cart.html" class="cart-link">Cart <span id="cartCount" class="cart-count">0</span></a>
             </nav>
         </div>
     </header>
@@ -24,8 +25,37 @@
     <section class="collection container">
         <h1 class="collection-title">Collection</h1>
 
+        <div class="filters">
+            <label>Shape:
+                <select id="shapeFilter">
+                    <option value="">All</option>
+                </select>
+            </label>
+            <label>Color:
+                <select id="colorFilter">
+                    <option value="">All</option>
+                </select>
+            </label>
+            <button id="clearFilters" class="btn-primary" style="margin-left:10px;">Clear</button>
+        </div>
+
         <div class="grid" id="productsGrid">
-            <!-- карточки сюда -->
+            <!-- карточки будут сгенерированы из products.js -->
+        </div>
+
+        <!-- shared modal (открывается при клике на карточку) -->
+        <div id="productModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <img id="modalImg" src="" alt="Product">
+                <h3 id="modalName"></h3>
+                <p id="modalDescription"></p>
+                <div class="modal-meta">
+                    <span id="modalShape"></span> • <span id="modalColor"></span>
+                </div>
+                <span id="modalPrice"></span>
+                <button id="modalAddBtn" class="btn-primary">Add to Cart</button>
+            </div>
         </div>
     </section>
 

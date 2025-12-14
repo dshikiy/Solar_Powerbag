@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cart — SOLARÉ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">SOLARÉ</div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="collection.html">Collection</a>
+                <a href="technology.html">Technology</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <a href="cart.html" class="cart-link">Cart <span id="cartCount" class="cart-count">0</span></a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding:60px 0;">
+        <h1 style="font-family: 'Playfair Display', serif;">Your Cart</h1>
+        <div id="cartContainer" style="margin-top:20px;">
+            <!-- Cart items will be rendered here by js/cart.js -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        © 2025 SOLARÉ
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script>
+        // обновить счётчик корзины при загрузке
+        +document.addEventListener('DOMContentLoaded', () => {
+            +
+            if (window.solare && window.solare.updateCartCount) window.solare.updateCartCount(); +
+        });
+    </script>
+</body>
+
+</html>
