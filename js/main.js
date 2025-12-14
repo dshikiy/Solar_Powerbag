@@ -6,13 +6,20 @@
 const previewGrid = document.getElementById("previewGrid");
 const productsGrid = document.getElementById("productsGrid");
 const modal = document.getElementById("productModal");
-const modalImg = document.getElementById("modalImg");
+const modalMainImg = document.getElementById("modalMainImg");
 const modalName = document.getElementById("modalName");
 const modalDescription = document.getElementById("modalDescription");
 const modalPrice = document.getElementById("modalPrice");
 const modalShape = document.getElementById("modalShape");
 const modalColor = document.getElementById("modalColor");
 const modalAddBtn = document.getElementById("modalAddBtn");
+const modalThumbs = document.getElementById('modalThumbs');
+const modalPrev = document.getElementById('modalPrev');
+const modalNext = document.getElementById('modalNext');
+const miniCartBtn = document.getElementById('miniCartBtn');
+const miniCartDropdown = document.getElementById('miniCartDropdown');
+const miniCartItemsEl = document.querySelector('.mini-cart-items');
+const miniCartTotalEl = document.querySelector('.mini-cart-total');
 const closeBtn = document.querySelectorAll(".close");
 const cartCountEls = document.querySelectorAll("#cartCount");
 
@@ -24,6 +31,7 @@ const searchInput = document.getElementById('searchInput');
 const sortSelect = document.getElementById('sortSelect');
 
 let currentProduct = null;
+let modalIndex = 0;
 
 // --- localStorage cart helpers ---
 function getCart() {
@@ -47,7 +55,7 @@ function addToCart(productId) {
     if (existing) {
         existing.qty += 1;
     } else {
-        cart.push({ id: product.id, name: product.name, price: product.price, image: product.image, qty: 1 });
+        cart.push({ id: product.id, name: product.name, price: product.price, image: (product.images && product.images[0]) || product.image, qty: 1 });
     }
     saveCart(cart);
 }
@@ -79,6 +87,7 @@ function updateCartCount() {
     const cart = getCart();
     const count = cart.reduce((s, i) => s + i.qty, 0);
     cartCountEls.forEach(el => el.textContent = count);
+    renderMiniCart();
 }
 
 // --- rendering ---
@@ -87,8 +96,8 @@ function createCard(product) {
     card.className = 'card';
     card.dataset.id = product.id;
     card.innerHTML = `
-        <div class="card-media" style="position:relative; overflow:hidden;">
-            <img src="${product.image}" alt="${product.alt || product.name}" loading="lazy">
+            <div class="card-media" style="position:relative; overflow:hidden;">
+            <img src="${(product.images && product.images[0]) || product.image}" alt="${product.alt || product.name}" loading="lazy">
             <div class="overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:8px; opacity:0; transition:opacity .18s ease; background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.25) 100%);">
                 <button class="btn-primary btn-small quick-view">View</button>
                 <button class="btn-primary btn-small quick-add">Add</button>
@@ -101,11 +110,22 @@ function createCard(product) {
     card.addEventListener('mouseenter', () => { const ov = card.querySelector('.overlay'); if (ov) ov.style.opacity = '1'; });
     card.addEventListener('mouseleave', () => { const ov = card.querySelector('.overlay'); if (ov) ov.style.opacity = '0'; });
     // quick actions
-    card.querySelector('.quick-view').addEventListener('click', (e) => { e.stopPropagation();
-        openModal(product.id); });
-    card.querySelector('.quick-add').addEventListener('click', (e) => { e.stopPropagation();
+    card.querySelector('.quick-view').addEventListener('click', (e) => {
+        e.stopPropagation();
+        openModal(product.id);
+    });
+    card.querySelector('.quick-add').addEventListener('click', (e) => {
+        e.stopPropagation();
         addToCart(product.id);
-        showToast(`${product.name} добавлен в корзину`); });
+        showToast(`${product.name} добавлен в корзину`);
+    });
+    // add details link
+    const details = document.createElement('a');
+    details.className = 'btn-primary btn-small';
+    details.href = `product.html?id=${product.id}`;
+    details.textContent = 'Details';
+    details.addEventListener('click', (e) => { e.stopPropagation(); /* follow link */ });
+    card.querySelector('.overlay').appendChild(details);
     card.addEventListener('click', () => openModal(product.id));
     return card;
 }
@@ -131,7 +151,22 @@ function openModal(id) {
     const product = products.find(p => p.id === Number(id));
     if (!product) return;
     currentProduct = product;
-    modalImg.src = product.image;
+    // gallery setup
+    const imgs = product.images && product.images.length ? product.images : [product.image];
+    modalIndex = 0;
+    if (modalMainImg) modalMainImg.src = imgs[modalIndex];
+    if (modalThumbs) {
+        modalThumbs.innerHTML = '';
+        imgs.forEach((src, i) => {
+            const t = document.createElement('img');
+            t.src = src;
+            t.className = 'gallery-thumb' + (i === modalIndex ? ' active' : '');
+            t.loading = 'lazy';
+            t.alt = product.name + ' view ' + (i + 1);
+            t.addEventListener('click', () => { showSlide(i); });
+            modalThumbs.appendChild(t);
+        });
+    }
     modalName.textContent = product.name;
     modalDescription.textContent = product.description;
     modalPrice.textContent = `$${product.price}`;
@@ -146,6 +181,62 @@ function openModal(id) {
 function closeModal() {
     if (modal) modal.classList.remove('show');
     currentProduct = null;
+}
+
+function showSlide(index) {
+    if (!currentProduct) return;
+    const imgs = currentProduct.images && currentProduct.images.length ? currentProduct.images : [currentProduct.image];
+    modalIndex = (index + imgs.length) % imgs.length;
+    if (modalMainImg) modalMainImg.src = imgs[modalIndex];
+    // update thumbs
+    if (modalThumbs) {
+        const thumbs = modalThumbs.querySelectorAll('.gallery-thumb');
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === modalIndex));
+    }
+}
+
+function nextSlide() {
+    if (!currentProduct) return;
+    showSlide(modalIndex + 1);
+}
+
+function prevSlide() {
+    if (!currentProduct) return;
+    showSlide(modalIndex - 1);
+}
+
+function renderMiniCart() {
+    if (!miniCartItemsEl) return;
+    const cart = getCart();
+    miniCartItemsEl.innerHTML = '';
+    if (!cart.length) {
+        miniCartItemsEl.innerHTML = '<div style="padding:12px;color:#666;">Корзина пуста</div>';
+        if (miniCartTotalEl) miniCartTotalEl.textContent = 'Total: $0';
+        return;
+    }
+    cart.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'mini-cart-item';
+        row.innerHTML = `<img src="${item.image}" alt="${item.name}"><div style="flex:1;"><div style="font-weight:600">${item.name}</div><div style="font-size:13px;color:#666">Qty ${item.qty} • $${item.price}</div></div><button class="mini-remove" data-id="${item.id}" aria-label="Remove">×</button>`;
+        miniCartItemsEl.appendChild(row);
+    });
+    const total = cart.reduce((s, i) => s + i.qty * i.price, 0);
+    if (miniCartTotalEl) miniCartTotalEl.textContent = `Total: $${total}`;
+    // attach remove handlers
+    miniCartItemsEl.querySelectorAll('.mini-remove').forEach(btn => btn.addEventListener('click', (e) => {
+        const id = Number(btn.dataset.id);
+        removeFromCart(id);
+    }));
+}
+
+function removeFromCart(id) {
+    const cart = getCart();
+    const idx = cart.findIndex(i => i.id === id);
+    if (idx === -1) return;
+    cart.splice(idx, 1);
+    saveCart(cart);
+    renderMiniCart();
+    showToast('Товар удалён из корзины');
 }
 
 // --- filters ---
@@ -215,6 +306,37 @@ document.addEventListener('DOMContentLoaded', () => {
             addToCart(currentProduct.id);
             closeModal();
             showToast(`${currentProduct.name} добавлен в корзину`);
+        }
+    });
+
+    // gallery arrows
+    if (modalPrev) modalPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevSlide();
+    });
+    if (modalNext) modalNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextSlide();
+    });
+
+    // keyboard navigation for gallery when modal open
+    window.addEventListener('keydown', (e) => {
+        if (!modal || !modal.classList.contains('show')) return;
+        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // mini-cart toggle
+    if (miniCartBtn && miniCartDropdown) miniCartBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = miniCartDropdown.classList.toggle('show');
+        miniCartBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // close mini-cart on outside click
+    window.addEventListener('click', (e) => {
+        if (miniCartDropdown && !miniCartDropdown.contains(e.target) && e.target !== miniCartBtn) {
+            miniCartDropdown.classList.remove('show');
+            if (miniCartBtn) miniCartBtn.setAttribute('aria-expanded', 'false');
         }
     });
 

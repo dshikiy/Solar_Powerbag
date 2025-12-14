@@ -19,14 +19,29 @@
                 <a href="technology.html">Technology</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="cart.html" class="cart-link">Cart <span id="cartCount" class="cart-count">0</span></a>
+                <div class="cart-wrap">
+                    <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
+                    <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
+                        <div class="mini-cart-items"></div>
+                        <div class="mini-cart-footer">
+                            <div class="mini-cart-total">Total: $0</div>
+                            <div style="display:flex; gap:8px; margin-top:8px;">
+                                <a href="cart.html" class="btn-secondary">View Cart</a>
+                                <a href="checkout.html" class="btn-primary">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
 
-    <main class="container" style="padding:60px 0;">
-        <h1 style="font-family: 'Playfair Display', serif;">Checkout</h1>
-        <div id="checkoutRoot" style="margin-top:20px; max-width:900px;"></div>
+    <main class="container checkout">
+        <div class="checkout-panel">
+            <h1>Checkout</h1>
+            <p class="form-foot">Заполни данные для доставки и оплаты — это тестовая демонстрация платежа.</p>
+            <div id="checkoutRoot" style="margin-top:18px;"></div>
+        </div>
     </main>
 
     <footer class="footer">

@@ -3,19 +3,24 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Admin — SOLARÉ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product — SOLARÉ</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta property="og:type" content="product" />
 </head>
 
 <body>
     <header class="header">
         <div class="container header-inner">
-            <div class="logo">SOLARÉ Admin</div>
+            <div class="logo">SOLARÉ</div>
             <nav class="nav">
-                <a href="index.html">Site</a>
-                <a href="admin.html">Admin</a>
+                <a href="index.html">Home</a>
+                <a href="collection.html">Collection</a>
+                <a href="technology.html">Technology</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
                 <div class="cart-wrap">
                     <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
                     <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
@@ -33,27 +38,22 @@
         </div>
     </header>
 
-    <main class="container" style="padding:40px 0;">
-        <h1 style="font-family:'Playfair Display', serif;">Admin Dashboard</h1>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:20px;">
-            <section style="background:#fff;padding:18px;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.04);">
-                <h3>Orders</h3>
-                <div id="adminOrders">Loading orders...</div>
-            </section>
-            <section style="background:#fff;padding:18px;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,0.04);">
-                <h3>Messages</h3>
-                <div id="adminMessages">Loading messages...</div>
-            </section>
-        </div>
+    <main class="container" style="padding:60px 0;">
+        <div id="productRoot"></div>
     </main>
 
     <footer class="footer">
         <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
             <div>© 2025 SOLARÉ</div>
+            <div><a href="about.html">About</a></div>
+            <div><a href="contact.html">Contact</a></div>
+            <div><a href="#">Instagram</a></div>
         </div>
     </footer>
 
-    <script src="js/admin.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/product.js"></script>
 </body>
 
 </html>

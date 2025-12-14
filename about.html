@@ -19,7 +19,19 @@
                 <a href="technology.html">Technology</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="cart.html" class="cart-link">Cart <span id="cartCount" class="cart-count">0</span></a>
+                <div class="cart-wrap">
+                    <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
+                    <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
+                        <div class="mini-cart-items"></div>
+                        <div class="mini-cart-footer">
+                            <div class="mini-cart-total">Total: $0</div>
+                            <div style="display:flex; gap:8px; margin-top:8px;">
+                                <a href="cart.html" class="btn-secondary">View Cart</a>
+                                <a href="checkout.html" class="btn-primary">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>

@@ -321,6 +321,136 @@ body {
     border-radius: 8px;
 }
 
+
+/* Gallery inside modal */
+
+.gallery {
+    position: relative;
+}
+
+.gallery-main {
+    text-align: center;
+}
+
+.gallery-main img {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.gallery-arrow.left {
+    left: -8px;
+}
+
+.gallery-arrow.right {
+    right: -8px;
+}
+
+.gallery-thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: flex-start;
+    overflow-x: auto;
+}
+
+.gallery-thumb {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0.8;
+    border: 2px solid transparent;
+}
+
+.gallery-thumb.active {
+    opacity: 1;
+    border-color: var(--gold);
+}
+
+
+/* Mini-cart dropdown */
+
+.cart-wrap {
+    position: relative;
+    display: inline-block;
+    margin-left: 16px;
+}
+
+.cart-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.mini-cart {
+    position: absolute;
+    right: 0;
+    top: 34px;
+    min-width: 320px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    padding: 12px;
+    z-index: 1200;
+    display: none;
+}
+
+.mini-cart.show {
+    display: block;
+}
+
+.mini-cart-items {
+    max-height: 260px;
+    overflow: auto;
+    display: grid;
+    gap: 8px;
+}
+
+.mini-cart-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.mini-cart-item img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.mini-cart-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.mini-cart-total {
+    font-weight: 700;
+}
+
 .modal.show {
     display: block;
     animation: fadeIn .18s ease;
@@ -495,4 +625,140 @@ select {
     border: 1px solid var(--gray);
     padding: 10px;
     border-radius: 6px;
+}
+
+
+/* Checkout styles */
+
+.checkout {
+    padding: 40px 0;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 28px;
+}
+
+.checkout-panel {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.checkout h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    margin-bottom: 14px;
+}
+
+.checkout h3 {
+    margin-bottom: 12px;
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.form-row .col {
+    flex: 1;
+}
+
+.field-label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-foot {
+    margin-top: 10px;
+    color: #666;
+    font-size: 13px;
+}
+
+.card-mock {
+    border: 1px solid var(--gray);
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.card-mock .chip {
+    width: 44px;
+    height: 28px;
+    background: linear-gradient(90deg, #ddd, #aaa);
+    border-radius: 4px;
+}
+
+.order-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.order-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.order-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.order-item .meta {
+    flex: 1;
+}
+
+.order-item .meta .name {
+    font-weight: 600;
+}
+
+.order-item .qty {
+    color: #666;
+    font-size: 13px;
+}
+
+.summary-total {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.btn-gold {
+    background: linear-gradient(90deg, rgba(201, 161, 74, 1) 0%, rgba(211, 178, 97, 1) 100%);
+    color: #fff;
+    border: none;
+}
+
+@media (max-width: 900px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+    .modal-content img {
+        max-height: 320px;
+    }
+    /* Product page specifics */
+    .product-breadcrumb {
+        color: #666;
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    .product-meta {
+        display: flex;
+        gap: 12px;
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+    .reviews {
+        margin-top: 18px;
+    }
 }

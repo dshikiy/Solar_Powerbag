@@ -15,39 +15,32 @@ function renderCheckout() {
     const root = document.getElementById('checkoutRoot');
     const cart = readCart();
     if (!cart || cart.length === 0) {
-        root.innerHTML = '<p>Your cart is empty. <a href="collection.html" class="btn-primary">Go to Collection</a></p>';
+        root.innerHTML = `<div class="checkout-panel"><p class="form-foot">Ваша корзина пуста. <a href="collection.html" class="btn-primary">Перейти в коллекцию</a></p></div>`;
         return;
     }
 
     let total = cart.reduce((s, i) => s + i.price * i.qty, 0);
 
     root.innerHTML = `
-        <div style="display:grid; grid-template-columns: 1fr 360px; gap:24px;">
-            <div>
+        <div class="checkout-grid">
+            <div class="checkout-panel">
                 <h3>Shipping Information</h3>
                 <form id="checkoutForm">
-                    <label>Full name</label>
-                    <input id="shipName" required style="width:100%; padding:8px; margin-bottom:8px;">
-                    <label>Address</label>
-                    <input id="shipAddress" required style="width:100%; padding:8px; margin-bottom:8px;">
-                    <label>City</label>
-                    <input id="shipCity" required style="width:100%; padding:8px; margin-bottom:8px;">
-                    <label>Postal code</label>
-                    <input id="shipPostal" required style="width:100%; padding:8px; margin-bottom:8px;">
-                    <h3 style="margin-top:16px;">Payment</h3>
-                    <label>Cardholder name</label>
-                    <input id="cardName" required style="width:100%; padding:8px; margin-bottom:8px;">
-                    <label>Card number</label>
-                    <input id="cardNumber" required style="width:100%; padding:8px; margin-bottom:8px;">
-                    <div style="display:flex; gap:8px;"><input id="cardExp" required placeholder="MM/YY" style="flex:1;padding:8px;"> <input id="cardCVC" required placeholder="CVC" style="width:100px;padding:8px;"></div>
-                    <div style="margin-top:12px;"><button class="btn-primary" type="submit">Pay ${formatMoney(total)}</button></div>
+                    <div class="form-row"><div class="col"><label class="field-label">Full name</label><input id="shipName" required></div></div>
+                    <div class="form-row"><div class="col"><label class="field-label">Address</label><input id="shipAddress" required></div></div>
+                    <div class="form-row"><div class="col"><label class="field-label">City</label><input id="shipCity" required></div><div class="col"><label class="field-label">Postal code</label><input id="shipPostal" required></div></div>
+                    <h3>Payment</h3>
+                    <div class="card-mock"><div class="chip" aria-hidden="true"></div><div style="flex:1;"><div style="font-weight:600">Test card</div><div style="font-size:13px;color:#666">Введите тестовые данные</div></div></div>
+                    <div style="margin-top:12px;"><label class="field-label">Cardholder name</label><input id="cardName" required></div>
+                    <div class="form-row"><div class="col"><label class="field-label">Card number</label><input id="cardNumber" required placeholder="4242 4242 4242 4242"></div><div style="width:120px;"><label class="field-label">CVC</label><input id="cardCVC" required placeholder="CVC"></div></div>
+                    <div style="margin-top:16px; display:flex; gap:12px; align-items:center;"><button id="payBtn" class="btn-primary btn-gold" type="submit">Pay ${formatMoney(total)}</button><div id="payMessage" style="color:#666;font-size:13px;"></div></div>
                 </form>
             </div>
-            <div style="border-left:1px solid var(--gray); padding-left:18px;">
+            <aside class="checkout-panel">
                 <h3>Order Summary</h3>
-                <div id="orderItems"></div>
-                <div style="margin-top:12px; font-weight:700;">Total: ${formatMoney(total)}</div>
-            </div>
+                <div class="order-summary" id="orderItems"></div>
+                <div style="margin-top:12px; display:flex; justify-content:space-between; align-items:center;"><div class="summary-total">Total</div><div class="summary-total">${formatMoney(total)}</div></div>
+            </aside>
         </div>
     `;
 
@@ -55,10 +48,8 @@ function renderCheckout() {
     const orderItems = document.getElementById('orderItems');
     cart.forEach(i => {
         const div = document.createElement('div');
-        div.style.display = 'flex';
-        div.style.justifyContent = 'space-between';
-        div.style.marginBottom = '8px';
-        div.innerHTML = `<div>${i.name} x${i.qty}</div><div>${formatMoney(i.price * i.qty)}</div>`;
+        div.className = 'order-item';
+        div.innerHTML = `<img src="${i.image}" alt="${i.name}"><div class="meta"><div class="name">${i.name}</div><div class="qty">Qty: ${i.qty} • ${formatMoney(i.price)}</div></div><div style="font-weight:700">${formatMoney(i.price * i.qty)}</div>`;
         orderItems.appendChild(div);
     });
 
@@ -68,23 +59,30 @@ function renderCheckout() {
         e.preventDefault();
         // Basic validation
         const name = document.getElementById('shipName').value.trim();
-        if (!name) return alert('Please fill required fields');
+        const address = document.getElementById('shipAddress').value.trim();
+        if (!name || !address) {
+            const msg = document.getElementById('payMessage');
+            if (msg) msg.textContent = 'Please complete shipping details';
+            return;
+        }
         // Simulate payment delay
-        const btn = form.querySelector('button');
+        const btn = document.getElementById('payBtn');
         btn.disabled = true;
         btn.textContent = 'Processing...';
+        const msg = document.getElementById('payMessage');
+        if (msg) msg.textContent = '';
         setTimeout(() => {
             // Save order to localStorage as demo
             const orders = JSON.parse(localStorage.getItem('solare_orders') || '[]');
             const orderId = Date.now();
-            orders.push({ id: orderId, items: cart, total, shipping: { name: document.getElementById('shipName').value }, date: new Date().toISOString() });
+            orders.push({ id: orderId, items: cart, total, shipping: { name: document.getElementById('shipName').value, address: document.getElementById('shipAddress').value }, date: new Date().toISOString() });
             localStorage.setItem('solare_orders', JSON.stringify(orders));
             localStorage.setItem('solare_last_order_id', String(orderId));
             // clear cart
             writeCart([]);
             // redirect to confirmation
             window.location.href = 'order-confirmation.html';
-        }, 1200);
+        }, 1100);
     });
 }
 

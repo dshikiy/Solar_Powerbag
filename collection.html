@@ -17,7 +17,19 @@
                 <a href="index.html">Home</a>
                 <a href="technology.html">Technology</a>
                 <a href="about.html">About</a>
-                <a href="cart.html" class="cart-link">Cart <span id="cartCount" class="cart-count">0</span></a>
+                <div class="cart-wrap">
+                    <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
+                    <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
+                        <div class="mini-cart-items"></div>
+                        <div class="mini-cart-footer">
+                            <div class="mini-cart-total">Total: $0</div>
+                            <div style="display:flex; gap:8px; margin-top:8px;">
+                                <a href="cart.html" class="btn-secondary">View Cart</a>
+                                <a href="checkout.html" class="btn-primary">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -58,7 +70,14 @@
             <div class="modal-content">
                 <span class="close" role="button" aria-label="Close modal" tabindex="0">&times;</span>
                 <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
-                    <div style="flex:1; min-width:260px;"><img id="modalImg" src="" alt="Product" style="width:100%; border-radius:8px;"></div>
+                    <div style="flex:1; min-width:260px;">
+                        <div class="gallery" id="modalGallery">
+                            <button class="gallery-arrow left" id="modalPrev" aria-label="Previous">&#10094;</button>
+                            <div class="gallery-main"><img id="modalMainImg" src="" alt="Product" style="width:100%; border-radius:8px;"></div>
+                            <button class="gallery-arrow right" id="modalNext" aria-label="Next">&#10095;</button>
+                            <div class="gallery-thumbs" id="modalThumbs"></div>
+                        </div>
+                    </div>
                     <div style="flex:1; min-width:260px; text-align:left;">
                         <h3 id="modalName"></h3>
                         <p id="modalDescription"></p>
