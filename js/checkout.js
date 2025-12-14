@@ -71,16 +71,32 @@ function renderCheckout() {
         btn.textContent = 'Processing...';
         const msg = document.getElementById('payMessage');
         if (msg) msg.textContent = '';
-        setTimeout(() => {
-            // Save order to localStorage as demo
-            const orders = JSON.parse(localStorage.getItem('solare_orders') || '[]');
-            const orderId = Date.now();
-            orders.push({ id: orderId, items: cart, total, shipping: { name: document.getElementById('shipName').value, address: document.getElementById('shipAddress').value }, date: new Date().toISOString() });
-            localStorage.setItem('solare_orders', JSON.stringify(orders));
-            localStorage.setItem('solare_last_order_id', String(orderId));
-            // clear cart
+        setTimeout(async() => {
+            const orderData = { items: cart, total, shipping: { name: document.getElementById('shipName').value, address: document.getElementById('shipAddress').value } };
+            // Try to POST to backend; fallback to localStorage on error
+            try {
+                const resp = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(orderData) });
+                if (resp.ok) {
+                    const json = await resp.json();
+                    const orderId = json.id || Date.now();
+                    localStorage.setItem('solare_last_order_id', String(orderId));
+                } else {
+                    // fallback
+                    const orders = JSON.parse(localStorage.getItem('solare_orders') || '[]');
+                    const orderId = Date.now();
+                    orders.push({ id: orderId, items: cart, total, shipping: orderData.shipping, date: new Date().toISOString(), offline: true });
+                    localStorage.setItem('solare_orders', JSON.stringify(orders));
+                    localStorage.setItem('solare_last_order_id', String(orderId));
+                }
+            } catch (e) {
+                const orders = JSON.parse(localStorage.getItem('solare_orders') || '[]');
+                const orderId = Date.now();
+                orders.push({ id: orderId, items: cart, total, shipping: orderData.shipping, date: new Date().toISOString(), offline: true });
+                localStorage.setItem('solare_orders', JSON.stringify(orders));
+                localStorage.setItem('solare_last_order_id', String(orderId));
+            }
+            // clear cart and redirect
             writeCart([]);
-            // redirect to confirmation
             window.location.href = 'order-confirmation.html';
         }, 1100);
     });

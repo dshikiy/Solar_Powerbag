@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="header">
         <div class="container header-inner">
             <div class="logo">SOLARÉ</div>
@@ -22,7 +23,7 @@
                 <div class="cart-wrap">
                     <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
                     <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
-                        <div class="mini-cart-items"></div>
+                        <div class="mini-cart-items" role="list"></div>
                         <div class="mini-cart-footer">
                             <div class="mini-cart-total">Total: $0</div>
                             <div style="display:flex; gap:8px; margin-top:8px;">
@@ -44,76 +45,113 @@
             </div>
         </section>
 
-        <section class="container" style="padding:60px 0;">
-            <div style="display:grid; grid-template-columns: 1fr 380px; gap:28px; align-items:start;">
-                <div>
-                    <h2 style="font-family:'Playfair Display', serif;">Get in touch</h2>
-                    <p style="color:#444;">Свяжитесь: <a href="mailto:hello@solare.example">hello@solare.example</a> или заполните форму.</p>
+        <main id="main">
+            <section class="container" style="padding:60px 0;">
+                <div style="display:grid; grid-template-columns: 1fr 380px; gap:28px; align-items:start;">
+                    <div>
+                        <h2 style="font-family:'Playfair Display', serif;">Get in touch</h2>
+                        <p style="color:#444;">Свяжитесь: <a href="mailto:hello@solare.example">hello@solare.example</a> или заполните форму.</p>
 
-                    <form id="contactForm" style="max-width:640px; margin-top:12px;">
-                        <label>Name</label>
-                        <input id="contactName" required placeholder="Ваше имя">
-                        <label style="margin-top:8px; display:block;">Email</label>
-                        <input id="contactEmail" type="email" required placeholder="you@example.com">
-                        <label style="margin-top:8px; display:block;">Message</label>
-                        <textarea id="contactMessage" required placeholder="Сообщение" style="height:140px;"></textarea>
-                        <div style="margin-top:12px;"><button id="contactSubmit" class="btn-primary" type="submit">Send Message</button></div>
-                        <div id="contactFeedback" style="margin-top:12px; color:green; display:none;"></div>
-                    </form>
+                        <form id="contactForm" style="max-width:640px; margin-top:12px;">
+                            <label>Name</label>
+                            <input id="contactName" required placeholder="Ваше имя">
+                            <label style="margin-top:8px; display:block;">Email</label>
+                            <input id="contactEmail" type="email" required placeholder="you@example.com">
+                            <label style="margin-top:8px; display:block;">Message</label>
+                            <textarea id="contactMessage" required placeholder="Сообщение" style="height:140px;"></textarea>
+                            <div style="margin-top:12px;"><button id="contactSubmit" class="btn-primary" type="submit">Send Message</button></div>
+                            <div id="contactFeedback" style="margin-top:12px; color:green; display:none;"></div>
+                        </form>
+                    </div>
+
+                    <aside style="background:#fff;padding:18px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.04);">
+                        <h3>Contact Details</h3>
+                        <p style="color:#666;">Open: Mon–Fri, 9:00–18:00<br>Phone: +1 (555) 123-4567<br>Address: 45 Fashion St, City</p>
+                        <div style="margin-top:12px;"><img src="assets/images/hero/hero.jpg" alt="map" style="width:100%; border-radius:6px; opacity:0.9; filter:grayscale(0.25);"></div>
+                    </aside>
                 </div>
+            </section>
+        </main>
 
-                <aside style="background:#fff;padding:18px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.04);">
-                    <h3>Contact Details</h3>
-                    <p style="color:#666;">Open: Mon–Fri, 9:00–18:00<br>Phone: +1 (555) 123-4567<br>Address: 45 Fashion St, City</p>
-                    <div style="margin-top:12px;"><img src="assets/images/hero/hero.jpg" alt="map" style="width:100%; border-radius:6px; opacity:0.9; filter:grayscale(0.25);"></div>
-                </aside>
+        <footer class="footer">
+            <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
+                <div>© 2025 SOLARÉ</div>
+                <div><a href="about.html">About</a></div>
+                <div><a href="contact.html">Contact</a></div>
+                <div><a href="#">Instagram</a></div>
             </div>
-        </section>
-    </main>
+        </footer>
 
-    <footer class="footer">
-        <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
-            <div>© 2025 SOLARÉ</div>
-            <div><a href="about.html">About</a></div>
-            <div><a href="contact.html">Contact</a></div>
-            <div><a href="#">Instagram</a></div>
-        </div>
-    </footer>
-
-    <script src="js/products.js"></script>
-    <script src="js/main.js"></script>
-    <script>
-        // Простая обработка формы для демонстрации
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('contactForm');
-            const feedback = document.getElementById('contactFeedback');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('contactName').value.trim();
-                const email = document.getElementById('contactEmail').value.trim();
-                const message = document.getElementById('contactMessage').value.trim();
-                if (!name || !email || !message) {
-                    feedback.style.color = 'red';
-                    feedback.textContent = 'Пожалуйста, заполните все поля.';
+        <div id="a11yToast" aria-live="polite" class="sr-only"></div>
+        <script src="js/products.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            // Простая обработка формы для демонстрации
+            document.addEventListener('DOMContentLoaded', () => {
+                const form = document.getElementById('contactForm');
+                const feedback = document.getElementById('contactFeedback');
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = document.getElementById('contactName').value.trim();
+                    const email = document.getElementById('contactEmail').value.trim();
+                    const message = document.getElementById('contactMessage').value.trim();
+                    if (!name || !email || !message) {
+                        feedback.style.color = 'red';
+                        feedback.textContent = 'Пожалуйста, заполните все поля.';
+                        feedback.style.display = 'block';
+                        // mark invalid and focus first missing field
+                        if (!name) {
+                            document.getElementById('contactName').setAttribute('aria-invalid', 'true');
+                            document.getElementById('contactName').focus();
+                        } else if (!email) {
+                            document.getElementById('contactEmail').setAttribute('aria-invalid', 'true');
+                            document.getElementById('contactEmail').focus();
+                        } else if (!message) {
+                            document.getElementById('contactMessage').setAttribute('aria-invalid', 'true');
+                            document.getElementById('contactMessage').focus();
+                        }
+                        return;
+                    }
+                    // Try to send to backend; fallback to localStorage
+                    const payload = {
+                        name,
+                        email,
+                        message
+                    };
+                    try {
+                        const r = await fetch('/api/messages', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        });
+                        if (r.ok) {
+                            feedback.style.color = 'green';
+                            feedback.textContent = 'Спасибо! Ваше сообщение отправлено.';
+                            feedback.style.display = 'block';
+                            form.reset();
+                            return;
+                        }
+                    } catch (e) {
+                        // network error -> fallback
+                    }
+                    const messages = JSON.parse(localStorage.getItem('solare_messages') || '[]');
+                    messages.push({
+                        name,
+                        email,
+                        message,
+                        date: new Date().toISOString(),
+                        offline: true
+                    });
+                    localStorage.setItem('solare_messages', JSON.stringify(messages));
+                    feedback.style.color = 'green';
+                    feedback.textContent = 'Спасибо! Ваше сообщение сохранено локально (offline).';
                     feedback.style.display = 'block';
-                    return;
-                }
-                // Сохраняем в локальное хранилище как демонстрация
-                const messages = JSON.parse(localStorage.getItem('solare_messages') || '[]');
-                messages.push({
-                    name,
-                    email,
-                    message,
-                    date: new Date().toISOString()
+                    form.reset();
                 });
-                localStorage.setItem('solare_messages', JSON.stringify(messages));
-                feedback.style.color = 'green';
-                feedback.textContent = 'Спасибо! Ваше сообщение отправлено.';
-                feedback.style.display = 'block';
-                form.reset();
             });
-        });
-    </script>
+        </script>
 </body>
 
 </html>

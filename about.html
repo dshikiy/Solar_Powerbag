@@ -4,12 +4,17 @@
 <head>
     <meta charset="utf-8">
     <title>About — SOLARÉ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <!-- HEADER -->
     <header class="header">
         <div class="container header-inner">
             <div class="logo">SOLARÉ</div>
@@ -17,59 +22,63 @@
                 <a href="index.html">Home</a>
                 <a href="collection.html">Collection</a>
                 <a href="technology.html">Technology</a>
-                <a href="about.html">About</a>
+                <a href="about.html" class="active">About</a>
                 <a href="contact.html">Contact</a>
                 <div class="cart-wrap">
-                    <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
-                    <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
-                        <div class="mini-cart-items"></div>
-                        <div class="mini-cart-footer">
-                            <div class="mini-cart-total">Total: $0</div>
-                            <div style="display:flex; gap:8px; margin-top:8px;">
-                                <a href="cart.html" class="btn-secondary">View Cart</a>
-                                <a href="checkout.html" class="btn-primary">Checkout</a>
-                            </div>
-                        </div>
-                    </div>
+                    <button id="miniCartBtn" class="cart-btn">Cart <span id="cartCount" class="cart-count">0</span></button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="page-hero">
-            <div class="container inner">
-                <h1 style="font-family: 'Playfair Display', serif; font-size:44px;">About Solaré</h1>
-                <p style="color:#fff; max-width:760px;">Мы — бренд, который соединяет эстетику высокой моды и практичность современных технологий. Наша миссия — делать энергосбережение частью стиля.</p>
-            </div>
-        </section>
+    <!-- HERO SECTION -->
+    <section class="page-hero" style="background: url('assets/images/hero/hero.jpg') center/cover no-repeat; height: 60vh; display:flex; align-items:center;">
+        <div class="container" style="color:#fff; text-align:center;">
+            <h1 style="font-family: 'Playfair Display', serif; font-size:48px; margin-bottom:16px;">About Solaré</h1>
+            <p style="font-size:18px; max-width:760px; margin:0 auto;">Мы — бренд, который соединяет эстетику высокой моды и практичность современных технологий. Наша миссия — делать энергосбережение частью стиля.</p>
+        </div>
+    </section>
 
-        <section class="container" style="padding:60px 0;">
-            <h2 style="font-family:'Playfair Display', serif;">Our Story</h2>
-            <p style="color:#444; max-width:880px;">Основанный дизайнерами и инженерами, Solaré родился из желания создавать красивые вещи, которые делают жизнь удобнее. Мы проектируем сумки с интегрированными солнечными панелями и батареями, сохраняя внимание к деталям и качеству материалов.</p>
+    <!-- MAIN CONTENT -->
+    <main id="main">
+        <section class="container" style="padding:80px 0;">
+            <!-- Our Story -->
+            <h2 style="font-family:'Playfair Display', serif; font-size:36px; margin-bottom:24px;">Our Story</h2>
+            <p style="color:#444; font-size:16px; line-height:1.6; max-width:900px;">Основанный дизайнерами и инженерами, Solaré родился из желания создавать красивые вещи, которые делают жизнь удобнее. Мы проектируем сумки с интегрированными солнечными панелями и батареями, сохраняя внимание к деталям и качеству материалов.</p>
 
-            <h3 style="margin-top:28px;">Sustainability</h3>
-            <p style="color:#444; max-width:760px;">Мы отдаем предпочтение эко-материалам и честным производственным практикам. Наши поставщики проходят строгую проверку, а упаковка минималистична и перерабатываема.</p>
+            <!-- Sustainability -->
+            <h3 style="margin-top:48px; font-family:'Playfair Display', serif;">Sustainability</h3>
+            <p style="color:#444; font-size:16px; line-height:1.6; max-width:760px;">Мы отдаем предпочтение эко-материалам и честным производственным практикам. Наши поставщики проходят строгую проверку, а упаковка минималистична и перерабатываема.</p>
 
-            <h3 style="margin-top:28px;">Team</h3>
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin-top:12px;">
-                <div style="background:#fff; padding:18px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.04);"> <strong>Anna K.</strong>
+            <!-- Team -->
+            <h3 style="margin-top:48px; font-family:'Playfair Display', serif;">Team</h3>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:24px; margin-top:24px;">
+                <div class="team-card">
+                    <div class="team-photo" style="background:#f5f5f5; height:180px; border-radius:12px;"></div>
+                    <strong style="display:block; margin-top:12px;">Anna K.</strong>
                     <div style="color:#666; font-size:14px;">Founder & Designer</div>
                 </div>
-                <div style="background:#fff; padding:18px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.04);"> <strong>Mark R.</strong>
+                <div class="team-card">
+                    <div class="team-photo" style="background:#f5f5f5; height:180px; border-radius:12px;"></div>
+                    <strong style="display:block; margin-top:12px;">Mark R.</strong>
                     <div style="color:#666; font-size:14px;">Head of Engineering</div>
                 </div>
-                <div style="background:#fff; padding:18px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.04);"> <strong>Sophia L.</strong>
+                <div class="team-card">
+                    <div class="team-photo" style="background:#f5f5f5; height:180px; border-radius:12px;"></div>
+                    <strong style="display:block; margin-top:12px;">Sophia L.</strong>
                     <div style="color:#666; font-size:14px;">Operations</div>
                 </div>
             </div>
 
-            <div style="margin-top:28px;"><a href="collection.html" class="btn-primary">Shop Solaré</a></div>
+            <div style="margin-top:48px; text-align:center;">
+                <a href="collection.html" class="btn-primary">Shop Solaré</a>
+            </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
+    <!-- FOOTER -->
+    <footer class="footer" style="padding:40px 0; text-align:center; background:#f9f9f9;">
+        <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; font-size:14px; color:#666;">
             <div>© 2025 SOLARÉ</div>
             <div><a href="about.html">About</a></div>
             <div><a href="contact.html">Contact</a></div>
@@ -77,8 +86,6 @@
         </div>
     </footer>
 
-    <script src="js/products.js"></script>
-    <script src="js/main.js"></script>
 </body>
 
 </html>

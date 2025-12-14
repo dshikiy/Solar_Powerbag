@@ -11,6 +11,7 @@
 
 <body>
 
+    <a class="skip-link" href="#main">Skip to content</a>
     <!-- HEADER -->
     <header class="header">
         <div class="container header-inner">
@@ -24,7 +25,7 @@
                 <div class="cart-wrap">
                     <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
                     <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
-                        <div class="mini-cart-items"></div>
+                        <div class="mini-cart-items" role="list"></div>
                         <div class="mini-cart-footer">
                             <div class="mini-cart-total">Total: $0</div>
                             <div style="display:flex; gap:8px; margin-top:8px;">
@@ -46,91 +47,93 @@
             <a href="collection.html" class="btn-primary">View Collection</a>
         </div>
     </section>
-    <!-- Конец Hero -->
+    <main id="main">
+        <!-- Конец Hero -->
 
-    <!-- FEATURES -->
-    <section class="features container">
-        <h2>Why Choose Solaré</h2>
-        <div class="features-grid">
-            <div class="feature">
-                <h3>Integrated Solar Panel</h3>
-                <p>Charge your devices on the go with solar energy.</p>
-            </div>
-            <div class="feature">
-                <h3>5000 mAh Battery</h3>
-                <p>Reliable power to keep your phone charged anywhere.</p>
-            </div>
-            <div class="feature">
-                <h3>USB Output</h3>
-                <p>Easy charging with USB ports built right into your bag.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- POPULAR BAGS -->
-    <section class="preview-collection container">
-        <h2>Popular Bags</h2>
-        <div class="grid" id="previewGrid">
-            <!-- Превью-карточки будут сгенерированы из products.js -->
-        </div>
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="collection.html" class="btn-primary">View All Collection</a>
-        </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="about container">
-        <h2>About Solaré</h2>
-        <p>Solaré is a luxury handbag brand combining elegance with modern solar technology. Every bag is crafted to provide style, utility, and sustainability.</p>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta container">
-        <h2>Experience Luxury & Innovation</h2>
-        <p>Discover our full collection and feel the power of solar elegance.</p>
-        <div style="text-align:center; margin-top:20px;">
-            <a href="collection.html" class="btn-primary">Shop Now</a>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
-            <div>© 2025 SOLARÉ</div>
-            <div><a href="about.html">About</a></div>
-            <div><a href="contact.html">Contact</a></div>
-            <div><a href="#">Instagram</a></div>
-        </div>
-    </footer>
-
-    <script src="js/products.js"></script>
-    <script src="js/main.js"></script>
-
-    <!-- MODAL -->
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close" role="button" aria-label="Close modal" tabindex="0">&times;</span>
-            <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
-                <div style="flex:1; min-width:260px;">
-                    <div class="gallery" id="modalGallery">
-                        <button class="gallery-arrow left" id="modalPrev" aria-label="Previous">&#10094;</button>
-                        <div class="gallery-main"><img id="modalMainImg" src="" alt="Product" style="width:100%; border-radius:8px;"></div>
-                        <button class="gallery-arrow right" id="modalNext" aria-label="Next">&#10095;</button>
-                        <div class="gallery-thumbs" id="modalThumbs"></div>
-                    </div>
+        <!-- FEATURES -->
+        <section class="features container">
+            <h2>Why Choose Solaré</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <h3>Integrated Solar Panel</h3>
+                    <p>Charge your devices on the go with solar energy.</p>
                 </div>
-                <div style="flex:1; min-width:260px; text-align:left;">
-                    <h3 id="modalName"></h3>
-                    <p id="modalDescription"></p>
-                    <div class="modal-meta">
-                        <span id="modalShape"></span> • <span id="modalColor"></span>
-                    </div>
-                    <div id="modalPrice" style="font-weight:700; font-size:18px; margin:12px 0;"></div>
-                    <button id="modalAddBtn" class="btn-primary">Add to Cart</button>
+                <div class="feature">
+                    <h3>5000 mAh Battery</h3>
+                    <p>Reliable power to keep your phone charged anywhere.</p>
+                </div>
+                <div class="feature">
+                    <h3>USB Output</h3>
+                    <p>Easy charging with USB ports built right into your bag.</p>
                 </div>
             </div>
+        </section>
+
+        <!-- POPULAR BAGS -->
+        <section class="preview-collection container">
+            <h2>Popular Bags</h2>
+            <div class="grid" id="previewGrid">
+                <!-- Превью-карточки будут сгенерированы из products.js -->
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="collection.html" class="btn-primary">View All Collection</a>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="about container">
+            <h2>About Solaré</h2>
+            <p>Solaré is a luxury handbag brand combining elegance with modern solar technology. Every bag is crafted to provide style, utility, and sustainability.</p>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta container">
+            <h2>Experience Luxury & Innovation</h2>
+            <p>Discover our full collection and feel the power of solar elegance.</p>
+            <div style="text-align:center; margin-top:20px;">
+                <a href="collection.html" class="btn-primary">Shop Now</a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
+                <div>© 2025 SOLARÉ</div>
+                <div><a href="about.html">About</a></div>
+                <div><a href="contact.html">Contact</a></div>
+                <div><a href="#">Instagram</a></div>
+            </div>
+        </footer>
+
+        <div id="a11yToast" aria-live="polite" class="sr-only"></div>
+        <script src="js/products.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- MODAL -->
+        <div id="productModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalName">
+            <div class="modal-content">
+                <span class="close" role="button" aria-label="Close modal" tabindex="0">&times;</span>
+                <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
+                    <div style="flex:1; min-width:260px;">
+                        <div class="gallery" id="modalGallery">
+                            <button class="gallery-arrow left" id="modalPrev" aria-label="Previous">&#10094;</button>
+                            <div class="gallery-main"><img id="modalMainImg" src="" alt="Product" style="width:100%; border-radius:8px;"></div>
+                            <button class="gallery-arrow right" id="modalNext" aria-label="Next">&#10095;</button>
+                            <div class="gallery-thumbs" id="modalThumbs" role="list"></div>
+                        </div>
+                    </div>
+                    <div style="flex:1; min-width:260px; text-align:left;">
+                        <h3 id="modalName"></h3>
+                        <p id="modalDescription"></p>
+                        <div class="modal-meta">
+                            <span id="modalShape"></span> • <span id="modalColor"></span>
+                        </div>
+                        <div id="modalPrice" style="font-weight:700; font-size:18px; margin:12px 0;"></div>
+                        <button id="modalAddBtn" class="btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
 </body>
 

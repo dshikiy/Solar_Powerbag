@@ -28,28 +28,28 @@
         root.innerHTML = `
             <div style="margin-bottom:12px;"><a href="collection.html" class="btn-primary">← Back to Collection</a></div>
             <div class="checkout-grid">
-                <div class="checkout-panel">
+                <div class="checkout-panel product-panel">
                     <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
                         <div style="flex:1; min-width:260px;">
                             <div class="gallery" id="prodGallery">
                                 <button class="gallery-arrow left" id="prodPrev" aria-label="Previous">&#10094;</button>
-                                <div class="gallery-main"><img id="prodMainImg" src="${imgs[0]}" alt="${product.name}" style="width:100%; border-radius:8px;"></div>
+                                <div class="gallery-main"><img id="prodMainImg" src="${imgs[0]}" alt="${product.name}"></div>
                                 <button class="gallery-arrow right" id="prodNext" aria-label="Next">&#10095;</button>
                                 <div class="gallery-thumbs" id="prodThumbs"></div>
                             </div>
                         </div>
                         <div style="flex:1; min-width:260px; text-align:left;">
-                            <h1 style="font-family: 'Playfair Display', serif; margin-bottom:6px;">${product.name}</h1>
-                            <div style="font-weight:800; font-size:20px; margin-bottom:8px;">${formatMoney(product.price)}</div>
-                            <div style="color:#666; margin-bottom:12px;">${product.description}</div>
-                            <div style="display:flex; gap:8px; align-items:center; margin-bottom:12px;"><label class="field-label">Color</label><select id="variantColor"></select><label class="field-label">Shape</label><select id="variantShape"></select></div>
-                            <div style="display:flex; gap:8px; align-items:center;">
-                                <input id="productQty" type="number" min="1" value="1" style="width:80px;padding:8px;border-radius:6px;border:1px solid var(--gray);">
+                            <h1 class="product-title">${product.name}</h1>
+                            <div class="product-price">${formatMoney(product.price)}</div>
+                            <div class="product-desc">${product.description}</div>
+                            <div class="variants-row"><label class="field-label">Color</label><select id="variantColor" class="variant-select"></select><label class="field-label">Shape</label><select id="variantShape" class="variant-select"></select></div>
+                            <div class="qty-add-row">
+                                <input id="productQty" type="number" min="1" value="1">
                                 <button id="addToCartBtn" class="btn-primary btn-gold">Add to Cart</button>
                             </div>
                         </div>
                     </div>
-                    <div style="margin-top:22px;">
+                    <div class="reviews" style="margin-top:22px;">
                         <h3>Reviews</h3>
                         <div id="reviewsList" style="margin-bottom:12px;"></div>
                         <form id="reviewForm">
@@ -117,7 +117,8 @@
             else cart.push({ id: product.id, name: product.name, price: product.price, image: imgs[0], qty });
             localStorage.setItem('solare_cart', JSON.stringify(cart));
             if (window.solare && window.solare.updateCartCount) window.solare.updateCartCount();
-            alert('Добавлено в корзину');
+            if (window.solare && window.solare.showToast) window.solare.showToast('Добавлено в корзину');
+            else alert('Добавлено в корзину');
         });
 
         // reviews
@@ -134,9 +135,8 @@
             if (!revs.length) { list.innerHTML = '<div style="color:#666">Нет отзывов — будь первым!</div>'; return; }
             revs.slice().reverse().forEach(r => {
                 const div = document.createElement('div');
-                div.style.borderTop = '1px solid #eee';
-                div.style.padding = '8px 0';
-                div.innerHTML = `<div style="font-weight:700">${r.name} <span style="font-weight:600;color:#c9a14a">${'★'.repeat(r.rating)}</span></div><div style="color:#333">${r.text}</div><div style="color:#999;font-size:12px;margin-top:6px">${new Date(r.date).toLocaleString()}</div>`;
+                div.className = 'review';
+                div.innerHTML = `<div style="font-weight:700">${r.name} <span class="rating">${'★'.repeat(r.rating)}</span></div><div style="color:#333">${r.text}</div><div style="color:#999;font-size:12px;margin-top:6px">${new Date(r.date).toLocaleString()}</div>`;
                 list.appendChild(div);
             });
         }
@@ -177,10 +177,12 @@
             "offers": { "@type": "Offer", "priceCurrency": "USD", "price": product.price }
         };
         let s = document.getElementById('prodJsonLd');
-        if (!s) { s = document.createElement('script');
+        if (!s) {
+            s = document.createElement('script');
             s.id = 'prodJsonLd';
             s.type = 'application/ld+json';
-            document.head.appendChild(s); }
+            document.head.appendChild(s);
+        }
         s.textContent = JSON.stringify(ld);
     }
 

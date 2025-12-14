@@ -1,0 +1,13 @@
+{
+    "name": "solare-mock-api",
+    "version": "1.0.0",
+    "description": "Mock API for Solaré demo (orders & messages)",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2"
+    }
+}

@@ -66,6 +66,7 @@ function showToast(message) {
     if (!toast) {
         toast = document.createElement('div');
         toast.id = 'solareToast';
+        toast.setAttribute('role', 'status');
         toast.style.position = 'fixed';
         toast.style.left = '50%';
         toast.style.bottom = '24px';
@@ -79,8 +80,11 @@ function showToast(message) {
         document.body.appendChild(toast);
     }
     toast.textContent = message;
+    // announce for screen readers via aria-live region
+    const live = document.getElementById('a11yToast');
+    if (live) live.textContent = message;
     toast.style.opacity = '1';
-    setTimeout(() => { toast.style.opacity = '0'; }, 2200);
+    setTimeout(() => { toast.style.opacity = '0'; if (live) live.textContent = ''; }, 2200);
 }
 
 function updateCartCount() {
@@ -163,6 +167,7 @@ function openModal(id) {
             t.className = 'gallery-thumb' + (i === modalIndex ? ' active' : '');
             t.loading = 'lazy';
             t.alt = product.name + ' view ' + (i + 1);
+            t.setAttribute('role', 'listitem');
             t.addEventListener('click', () => { showSlide(i); });
             modalThumbs.appendChild(t);
         });
@@ -172,15 +177,33 @@ function openModal(id) {
     modalPrice.textContent = `$${product.price}`;
     modalShape.textContent = product.shape;
     modalColor.textContent = product.color;
-    if (modal) modal.classList.add('show');
-    // move focus to close button for accessibility
+    if (modal) {
+        // set aria states and visually show
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        // hide main content from assistive tech
+        const mainEl = document.getElementById('main');
+        if (mainEl) mainEl.setAttribute('aria-hidden', 'true');
+    }
+    // save and move focus to close button for accessibility
+    window.__lastFocused = document.activeElement;
     const closeBtnEl = modal ? modal.querySelector('.close') : null;
     if (closeBtnEl) closeBtnEl.focus();
 }
 
 function closeModal() {
-    if (modal) modal.classList.remove('show');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+    }
     currentProduct = null;
+    const mainEl = document.getElementById('main');
+    if (mainEl) mainEl.removeAttribute('aria-hidden');
+    // restore focus
+    if (window.__lastFocused) {
+        try { window.__lastFocused.focus(); } catch (e) {}
+        window.__lastFocused = null;
+    }
 }
 
 function showSlide(index) {
@@ -217,6 +240,7 @@ function renderMiniCart() {
     cart.forEach(item => {
         const row = document.createElement('div');
         row.className = 'mini-cart-item';
+        row.setAttribute('role', 'listitem');
         row.innerHTML = `<img src="${item.image}" alt="${item.name}"><div style="flex:1;"><div style="font-weight:600">${item.name}</div><div style="font-size:13px;color:#666">Qty ${item.qty} • $${item.price}</div></div><button class="mini-remove" data-id="${item.id}" aria-label="Remove">×</button>`;
         miniCartItemsEl.appendChild(row);
     });
@@ -327,11 +351,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // mini-cart toggle
-    if (miniCartBtn && miniCartDropdown) miniCartBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = miniCartDropdown.classList.toggle('show');
-        miniCartBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
+    if (miniCartBtn && miniCartDropdown) {
+        miniCartBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const open = miniCartDropdown.classList.toggle('show');
+            miniCartBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        // keyboard support (Enter / Space)
+        miniCartBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                miniCartBtn.click();
+            }
+        });
+    }
     // close mini-cart on outside click
     window.addEventListener('click', (e) => {
         if (miniCartDropdown && !miniCartDropdown.contains(e.target) && e.target !== miniCartBtn) {

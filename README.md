@@ -11,7 +11,17 @@ How to run locally
 python -m http.server 8000
 ```
 
-3. Open http://localhost:8000/ in your browser.
+3. (Optional) Start the mock API server to persist orders/messages instead of `localStorage`:
+
+```bash
+cd server
+npm install
+npm start
+```
+
+This starts the mock API on http://localhost:9876. If the API is not running, the frontend will fallback to saving orders and messages in `localStorage`.
+
+4. Open http://localhost:8000/ in your browser.
 
 Implemented features
 

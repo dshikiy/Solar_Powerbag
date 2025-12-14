@@ -89,8 +89,8 @@ body {
 
 .hero-content {
     text-align: center;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 48px;
     max-width: 900px;
     border-radius: 8px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.06);
@@ -98,8 +98,18 @@ body {
 
 .hero-content h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 56px;
+    font-size: 48px;
     margin-bottom: 20px;
+}
+
+.hero-content h1::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: var(--gold);
+    margin: 12px auto 0;
+    border-radius: 2px;
 }
 
 .hero-content p {
@@ -113,17 +123,22 @@ body {
 
 .btn-primary {
     padding: 14px 40px;
-    border: 1px solid var(--black);
+    border: 1px solid rgba(201, 161, 74, 0.9);
     text-decoration: none;
     color: var(--black);
     font-size: 14px;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
+    letter-spacing: 1.5px;
+    transition: all 0.22s ease;
+    background: transparent;
+    font-weight: 600;
+    border-radius: 8px;
 }
 
 .btn-primary:hover {
-    background: var(--black);
-    color: var(--white);
+    background: var(--gold);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(201, 161, 74, 0.14);
+    transform: translateY(-3px);
 }
 
 .btn-gold {
@@ -189,6 +204,7 @@ body {
     padding: 12px;
     border-radius: 8px;
     border: 1px solid transparent;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
 }
 
 .card img {
@@ -207,13 +223,98 @@ body {
 
 .card .price {
     font-size: 16px;
-    color: var(--muted);
-    font-weight: 600;
+    color: var(--gold);
+    font-weight: 700;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(201, 161, 74, 0.4);
+    transform: translateY(-8px);
+    border-color: rgba(201, 161, 74, 0.45);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Product page specifics */
+
+.product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    margin-bottom: 6px;
+}
+
+.product-price {
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+.product-desc {
+    color: #666;
+    margin-bottom: 14px;
+    line-height: 1.55;
+}
+
+.variants-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.variant-select {
+    padding: 8px 10px;
+    border: 1px solid var(--gray);
+    border-radius: 6px;
+}
+
+.qty-add-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+#productQty {
+    width: 92px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--gray);
+}
+
+#addToCartBtn {
+    padding: 12px 20px;
+    border-radius: 8px;
+}
+
+.reviews {
+    margin-top: 20px;
+}
+
+.review {
+    border-top: 1px solid #eee;
+    padding: 10px 0;
+}
+
+.review .rating {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+.gallery-main img {
+    max-height: 520px;
+}
+
+.gallery-thumbs {
+    gap: 10px;
+}
+
+.gallery-thumb {
+    width: 76px;
+    height: 76px;
+}
+
+.gallery-thumb.active {
+    border-color: var(--gold);
 }
 
 .card .overlay .btn-primary {
@@ -761,4 +862,52 @@ select {
     .reviews {
         margin-top: 18px;
     }
+}
+
+
+/* Accessibility helpers */
+
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.skip-link:focus {
+    left: 12px;
+    top: 12px;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    background: var(--black);
+    color: var(--white);
+    z-index: 2000;
+    border-radius: 6px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* stronger focus outlines for keyboard users */
+
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 3px solid rgba(201, 161, 74, 0.45);
+    outline-offset: 2px;
 }

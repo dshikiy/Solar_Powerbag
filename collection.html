@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="header">
         <div class="container header-inner">
@@ -20,7 +21,7 @@
                 <div class="cart-wrap">
                     <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
                     <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
-                        <div class="mini-cart-items"></div>
+                        <div class="mini-cart-items" role="list"></div>
                         <div class="mini-cart-footer">
                             <div class="mini-cart-total">Total: $0</div>
                             <div style="display:flex; gap:8px; margin-top:8px;">
@@ -34,75 +35,77 @@
         </div>
     </header>
 
-    <section class="collection container">
-        <h1 class="collection-title">Collection</h1>
+    <main id="main">
+        <section class="collection container">
+            <h1 class="collection-title">Collection</h1>
 
-        <div class="filters">
-            <label>Search:
+            <div class="filters">
+                <label>Search:
                 <input id="searchInput" placeholder="Search by name" style="padding:8px 10px; border-radius:6px;">
             </label>
-            <label>Sort:
+                <label>Sort:
                 <select id="sortSelect">
                     <option value="">Featured</option>
                     <option value="price-asc">Price: Low &uarr;</option>
                     <option value="price-desc">Price: High &darr;</option>
                 </select>
             </label>
-            <label>Shape:
+                <label>Shape:
                 <select id="shapeFilter">
                     <option value="">All</option>
                 </select>
             </label>
-            <label>Color:
+                <label>Color:
                 <select id="colorFilter">
                     <option value="">All</option>
                 </select>
             </label>
-            <button id="clearFilters" class="btn-primary" style="margin-left:10px;">Clear</button>
-        </div>
+                <button id="clearFilters" class="btn-primary" style="margin-left:10px;">Clear</button>
+            </div>
 
-        <div class="grid" id="productsGrid">
-            <!-- карточки будут сгенерированы из products.js -->
-        </div>
+            <div class="grid" id="productsGrid">
+                <!-- карточки будут сгенерированы из products.js -->
+            </div>
 
-        <!-- shared modal (открывается при клике на карточку) -->
-        <div id="productModal" class="modal">
-            <div class="modal-content">
-                <span class="close" role="button" aria-label="Close modal" tabindex="0">&times;</span>
-                <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
-                    <div style="flex:1; min-width:260px;">
-                        <div class="gallery" id="modalGallery">
-                            <button class="gallery-arrow left" id="modalPrev" aria-label="Previous">&#10094;</button>
-                            <div class="gallery-main"><img id="modalMainImg" src="" alt="Product" style="width:100%; border-radius:8px;"></div>
-                            <button class="gallery-arrow right" id="modalNext" aria-label="Next">&#10095;</button>
-                            <div class="gallery-thumbs" id="modalThumbs"></div>
+            <!-- shared modal (открывается при клике на карточку) -->
+            <div id="productModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalName">
+                <div class="modal-content">
+                    <span class="close" role="button" aria-label="Close modal" tabindex="0">&times;</span>
+                    <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap;">
+                        <div style="flex:1; min-width:260px;">
+                            <div class="gallery" id="modalGallery">
+                                <button class="gallery-arrow left" id="modalPrev" aria-label="Previous">&#10094;</button>
+                                <div class="gallery-main"><img id="modalMainImg" src="" alt="Product" style="width:100%; border-radius:8px;"></div>
+                                <button class="gallery-arrow right" id="modalNext" aria-label="Next">&#10095;</button>
+                                <div class="gallery-thumbs" id="modalThumbs"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div style="flex:1; min-width:260px; text-align:left;">
-                        <h3 id="modalName"></h3>
-                        <p id="modalDescription"></p>
-                        <div class="modal-meta">
-                            <span id="modalShape"></span> • <span id="modalColor"></span>
+                        <div style="flex:1; min-width:260px; text-align:left;">
+                            <h3 id="modalName"></h3>
+                            <p id="modalDescription"></p>
+                            <div class="modal-meta">
+                                <span id="modalShape"></span> • <span id="modalColor"></span>
+                            </div>
+                            <div id="modalPrice" style="font-weight:700; font-size:18px; margin:12px 0;"></div>
+                            <button id="modalAddBtn" class="btn-primary">Add to Cart</button>
                         </div>
-                        <div id="modalPrice" style="font-weight:700; font-size:18px; margin:12px 0;"></div>
-                        <button id="modalAddBtn" class="btn-primary">Add to Cart</button>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="footer">
-        <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
-            <div>© 2025 SOLARÉ</div>
-            <div><a href="about.html">About</a></div>
-            <div><a href="contact.html">Contact</a></div>
-            <div><a href="#">Instagram</a></div>
-        </div>
-    </footer>
+        <footer class="footer">
+            <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
+                <div>© 2025 SOLARÉ</div>
+                <div><a href="about.html">About</a></div>
+                <div><a href="contact.html">Contact</a></div>
+                <div><a href="#">Instagram</a></div>
+            </div>
+        </footer>
 
-    <script src="js/products.js"></script>
-    <script src="js/main.js"></script>
+        <div id="a11yToast" aria-live="polite" class="sr-only"></div>
+        <script src="js/products.js"></script>
+        <script src="js/main.js"></script>
 </body>
 
 </html>

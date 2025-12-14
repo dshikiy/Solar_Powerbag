@@ -4,92 +4,96 @@
 <head>
     <meta charset="utf-8">
     <title>Technology — SOLARÉ</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Solaré technology — solar charging, batteries and USB." />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <!-- HEADER -->
     <header class="header">
         <div class="container header-inner">
             <div class="logo">SOLARÉ</div>
             <nav class="nav">
                 <a href="index.html">Home</a>
                 <a href="collection.html">Collection</a>
-                <a href="technology.html">Technology</a>
+                <a href="technology.html" class="active">Technology</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
                 <div class="cart-wrap">
-                    <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
-                    <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
-                        <div class="mini-cart-items"></div>
-                        <div class="mini-cart-footer">
-                            <div class="mini-cart-total">Total: $0</div>
-                            <div style="display:flex; gap:8px; margin-top:8px;">
-                                <a href="cart.html" class="btn-secondary">View Cart</a>
-                                <a href="checkout.html" class="btn-primary">Checkout</a>
-                            </div>
-                        </div>
-                    </div>
+                    <button id="miniCartBtn" class="cart-btn">Cart <span id="cartCount" class="cart-count">0</span></button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section class="page-hero">
-            <div class="container inner">
-                <h1 style="font-family: 'Playfair Display', serif; font-size:44px; margin-bottom:8px;">Technology & Innovation</h1>
-                <p style="color:#fff; max-width:720px;">Solaré сочетает модный дизайн с проверенной электроникой — гибкие солнечные панели, надёжные аккумуляторы и продуманные интерфейсы для удобства использования.</p>
-            </div>
-        </section>
+    <!-- HERO -->
+    <section class="page-hero" style="background: url('assets/images/hero/hero.jpg') center/cover no-repeat; height: 60vh; display:flex; align-items:center;">
+        <div class="container" style="color:#fff; text-align:center;">
+            <h1 style="font-family: 'Playfair Display', serif; font-size:48px; margin-bottom:16px;">Technology & Innovation</h1>
+            <p style="font-size:18px; max-width:720px; margin:0 auto;">Solaré сочетает модный дизайн с проверенной электроникой — гибкие солнечные панели, надёжные аккумуляторы и продуманные интерфейсы для удобства использования.</p>
+        </div>
+    </section>
 
-        <section class="container" style="padding:60px 0;">
-            <h2 style="font-family:'Playfair Display', serif;">Our Technology</h2>
-            <p style="color:#444; max-width:880px;">Мы интегрируем тонкие солнечные модули, которые аккуратно вписываются в силуэт сумки и обеспечивают зарядку в течение дня. Аккумуляторы защищены схемой управления батареей (BMS), а интерфейсы поддерживают USB-A и Type-C зарядку.</p>
+    <!-- MAIN CONTENT -->
+    <main id="main">
+        <section class="container" style="padding:80px 0;">
+            <!-- Our Technology -->
+            <h2 style="font-family:'Playfair Display', serif; font-size:36px; margin-bottom:24px;">Our Technology</h2>
+            <p style="color:#444; font-size:16px; line-height:1.6; max-width:880px;">Мы интегрируем тонкие солнечные модули, аккуратно вписывающиеся в силуэт сумки, обеспечивая зарядку в течение дня. Аккумуляторы защищены схемой управления батареей (BMS), а интерфейсы поддерживают USB-A и Type-C зарядку.</p>
 
-            <section class="features" style="padding-top:24px;">
-                <div class="features-grid">
-                    <div class="feature">
-                        <h3>Солнечная панель</h3>
-                        <p>Гибкая и водостойкая панель с КПД до 22% для оптимальной работы при рассеянном свете.</p>
+            <!-- Features Grid -->
+            <section class="features" style="padding-top:40px;">
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:32px;">
+                    <div class="feature-card" style="background:#fff; padding:24px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.05); text-align:center;">
+                        <h3 style="font-family:'Playfair Display', serif; margin-bottom:12px;">Солнечная панель</h3>
+                        <p style="color:#666; font-size:14px; line-height:1.5;">Гибкая и водостойкая панель с КПД до 22% для оптимальной работы при рассеянном свете.</p>
                     </div>
-                    <div class="feature">
-                        <h3>Аккумулятор</h3>
-                        <p>Встроенные батареи 5000–10000 mAh с защитой, поддерживают быструю зарядку.</p>
+                    <div class="feature-card" style="background:#fff; padding:24px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.05); text-align:center;">
+                        <h3 style="font-family:'Playfair Display', serif; margin-bottom:12px;">Аккумулятор</h3>
+                        <p style="color:#666; font-size:14px; line-height:1.5;">Встроенные батареи 5000–10000 mAh с защитой, поддерживают быструю зарядку.</p>
                     </div>
-                    <div class="feature">
-                        <h3>Интерфейсы</h3>
-                        <p>USB-A и Type-C, встроенный индикатор заряда и интеллектуальные схемы регулировки мощности.</p>
+                    <div class="feature-card" style="background:#fff; padding:24px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.05); text-align:center;">
+                        <h3 style="font-family:'Playfair Display', serif; margin-bottom:12px;">Интерфейсы</h3>
+                        <p style="color:#666; font-size:14px; line-height:1.5;">USB-A и Type-C, встроенный индикатор заряда и интеллектуальные схемы регулировки мощности.</p>
                     </div>
                 </div>
             </section>
 
-            <h3 style="margin-top:32px;">Specifications</h3>
-            <ul style="color:#444; max-width:760px;">
+            <!-- Specifications -->
+            <h3 style="margin-top:48px; font-family:'Playfair Display', serif;">Specifications</h3>
+            <ul style="color:#444; font-size:16px; line-height:1.6; max-width:760px;">
                 <li>Солнечная панель: гибкая моно-кристаллическая (22% эффективности)</li>
                 <li>Аккумулятор: 5000–10000 mAh Li-ion, BMS, защита от перегрева</li>
                 <li>Вход/выход: USB-A, USB-C (PD поддержка с 18W)</li>
                 <li>Материалы: премиальная кожа/эко-замша, влагозащищённое покрытие</li>
             </ul>
 
-            <h3 style="margin-top:28px;">FAQ</h3>
-            <details style="margin-bottom:8px;">
+            <!-- FAQ -->
+            <h3 style="margin-top:32px; font-family:'Playfair Display', serif;">FAQ</h3>
+            <details style="margin-bottom:12px; font-size:16px; line-height:1.5;">
                 <summary>Сколько времени заряжается устройство от панели?</summary>
                 <div style="padding-top:8px;color:#666;">Зависит от условий: в полный солнечный день панель может дополнить батарею, но для быстрой полной зарядки обычно используют сетевую зарядку.</div>
             </details>
-            <details style="margin-bottom:8px;">
+            <details style="margin-bottom:12px; font-size:16px; line-height:1.5;">
                 <summary>Можно ли стирать сумку?</summary>
                 <div style="padding-top:8px;color:#666;">Электронные компоненты влагозащищены, но рекомендуем аккуратную сухую чистку и следовать инструкциям по уходу.</div>
             </details>
 
-            <div style="margin-top:28px;"><a href="collection.html" class="btn-primary">View Collection</a></div>
+            <div style="margin-top:40px; text-align:center;">
+                <a href="collection.html" class="btn-primary">View Collection</a>
+            </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div style="display:flex; justify-content:center; gap:18px; align-items:center; flex-wrap:wrap;">
+    <!-- FOOTER -->
+    <footer class="footer" style="padding:40px 0; text-align:center; background:#f9f9f9;">
+        <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap; font-size:14px; color:#666;">
             <div>© 2025 SOLARÉ</div>
             <div><a href="about.html">About</a></div>
             <div><a href="contact.html">Contact</a></div>

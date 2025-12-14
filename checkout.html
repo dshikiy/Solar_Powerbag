@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="header">
         <div class="container header-inner">
             <div class="logo">SOLARÉ</div>
@@ -22,7 +23,7 @@
                 <div class="cart-wrap">
                     <button id="miniCartBtn" class="cart-btn" aria-haspopup="true" aria-expanded="false">Cart <span id="cartCount" class="cart-count">0</span></button>
                     <div id="miniCartDropdown" class="mini-cart" aria-hidden="true">
-                        <div class="mini-cart-items"></div>
+                        <div class="mini-cart-items" role="list"></div>
                         <div class="mini-cart-footer">
                             <div class="mini-cart-total">Total: $0</div>
                             <div style="display:flex; gap:8px; margin-top:8px;">
@@ -36,7 +37,7 @@
         </div>
     </header>
 
-    <main class="container checkout">
+    <main id="main" class="container checkout">
         <div class="checkout-panel">
             <h1>Checkout</h1>
             <p class="form-foot">Заполни данные для доставки и оплаты — это тестовая демонстрация платежа.</p>
@@ -53,6 +54,7 @@
         </div>
     </footer>
 
+    <div id="a11yToast" aria-live="polite" class="sr-only"></div>
     <script src="js/products.js"></script>
     <script src="js/main.js"></script>
     <script src="js/checkout.js"></script>
