@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solaré — Luxury Solar Bags</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">SOLARÉ</div>
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <a href="collection.html">Collection</a>
+                <a href="#">Technology</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Solar Elegance</h1>
+            <p>Luxury handbags powered by the sun</p>
+            <a href="collection.html" class="btn-primary">View Collection</a>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features container">
+        <h2>Why Choose Solaré</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <h3>Integrated Solar Panel</h3>
+                <p>Charge your devices on the go with solar energy.</p>
+            </div>
+            <div class="feature">
+                <h3>5000 mAh Battery</h3>
+                <p>Reliable power to keep your phone charged anywhere.</p>
+            </div>
+            <div class="feature">
+                <h3>USB Output</h3>
+                <p>Easy charging with USB ports built right into your bag.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- POPULAR BAGS -->
+    <section class="preview-collection container">
+        <h2>Popular Bags</h2>
+        <div class="grid" id="previewGrid">
+            <div class="card">
+                <img src="assets/images/bags/bag1.jpg" alt="Solar Bag One">
+                <h3>Solar Bag One</h3>
+                <span>$320</span>
+            </div>
+            <div class="card">
+                <img src="assets/images/bags/bag2.jpg" alt="Solar Bag Two">
+                <h3>Solar Bag Two</h3>
+                <span>$340</span>
+            </div>
+            <div class="card">
+                <img src="assets/images/bags/bag3.jpg" alt="Solar Bag Three">
+                <h3>Solar Bag Three</h3>
+                <span>$300</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="collection.html" class="btn-primary">View All Collection</a>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about container">
+        <h2>About Solaré</h2>
+        <p>Solaré is a luxury handbag brand combining elegance with modern solar technology. Every bag is crafted to provide style, utility, and sustainability.</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta container">
+        <h2>Experience Luxury & Innovation</h2>
+        <p>Discover our full collection and feel the power of solar elegance.</p>
+        <div style="text-align:center; margin-top:20px;">
+            <a href="collection.html" class="btn-primary">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 SOLARÉ. All rights reserved.</p>
+    </footer>
+
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- MODAL -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImg" src="" alt="Product">
+            <h3 id="modalName"></h3>
+            <p id="modalDescription"></p>
+            <span id="modalPrice"></span>
+            <button class="btn-primary">Add to Cart</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

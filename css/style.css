@@ -1,0 +1,284 @@
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #000000;
+}
+
+
+/* VARIABLES */
+
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --gray: #e5e5e5;
+    --gold: #c9a14a;
+}
+
+
+/* LAYOUT */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header {
+    border-bottom: 1px solid var(--gray);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+.nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: var(--black);
+    font-size: 14px;
+}
+
+
+/* HERO */
+
+.hero {
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('../assets/images/hero/hero.jpg') center/cover no-repeat;
+}
+
+.hero-content {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 60px;
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 16px;
+    margin-bottom: 40px;
+}
+
+
+/* BUTTON */
+
+.btn-primary {
+    padding: 14px 40px;
+    border: 1px solid var(--black);
+    text-decoration: none;
+    color: var(--black);
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+
+/* FEATURES */
+
+.features {
+    padding: 80px 0;
+}
+
+.features h2 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 60px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    text-align: center;
+}
+
+.feature h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.feature p {
+    font-size: 14px;
+    color: #555;
+}
+
+
+/* COLLECTION GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.card {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card span {
+    font-size: 14px;
+    color: #555;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+
+/* ABOUT */
+
+.about {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.about p {
+    font-size: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: #555;
+}
+
+
+/* CTA */
+
+.cta {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.cta p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid var(--gray);
+    font-size: 12px;
+}
+
+
+/* MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-content img {
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.modal-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.modal-content span {
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.modal-content .btn-primary {
+    padding: 10px 30px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
